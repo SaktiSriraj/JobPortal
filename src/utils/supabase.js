@@ -10,8 +10,8 @@ const supabaseClient = async(supabaseAccessToken) => {
                 Authorization: `Bearer ${supabaseAccessToken}`,
             }
         }
-    })
+    });
     return supabase;
 };
 
-export default supabaseClient
+export default supabaseClient;
