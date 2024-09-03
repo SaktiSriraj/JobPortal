@@ -3,15 +3,44 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { BookmarkIcon, MapPinIcon, Trash2Icon } from "lucide-react"
 import { Button } from "./ui/button"
 import { Link } from "react-router-dom"
+import { saveJob } from "@/api/apiJobs";
+import useFetch from "@/hooks/use-fetch";
+import { useEffect, useState } from "react"
+
+
 
 const JobCard = ({
     job,
     isMyJob = false,
     savedInit = false,
-    onJobSave = () => {},
+    onJobAction = () => {},
 }) => {
 
+    const [saved, setSaved] = useState(savedInit)
+
+    const {
+        loading: loadingSavedJob,
+        data: savedJob,
+        fn: fnSavedJob,
+    } = useFetch(saveJob, {
+       alreadySaved: saved
+    });
+    
     const { user } = useUser()
+
+    const handleSaveJob = async () => {
+        await fnSavedJob({
+            user_id: user.id,
+            jobs_id: job.id
+        });
+        onJobAction()
+    }
+
+    useEffect(() => {
+        if(savedJob !== undefined) 
+            setSaved(savedJob?.length > 0)
+    }, [savedJob])
+    
     return (
         <Card className="flex flex-col">
             <CardHeader className="flex">
@@ -40,7 +69,16 @@ const JobCard = ({
                     <Button variant="secondary" className="w-full">More Details</Button>
                 </Link>
 
-                <BookmarkIcon size={20} stroke="gray" fill="gray"/>
+                {!isMyJob && (
+                    <Button variant="outline" className="w-15" onClick={handleSaveJob} disabled={loadingSavedJob}>
+                        {
+                            saved?
+                                <BookmarkIcon size={20} stroke="gray" fill="gray"/>
+                            :
+                                <BookmarkIcon size={20} stroke="gray"/>
+                        }
+                    </Button>
+                )}
             </CardFooter>
         </Card>
     )
