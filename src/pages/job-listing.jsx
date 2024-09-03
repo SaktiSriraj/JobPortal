@@ -4,6 +4,7 @@ import useFetch from '@/hooks/use-fetch'
 import { useUser } from '@clerk/clerk-react'
 import { BarLoader } from "react-spinners";
 import JobCard from '@/components/job-card';
+import { getCompanies } from '@/api/apiCompanies';
 
 
 
@@ -19,8 +20,8 @@ const JobListing = () => {
   console.log(jobs);
 
   useEffect(() => {
-    fnJobs();
-  }, [isLoaded])
+    if (isLoaded) fnJobs();
+  }, [isLoaded, location, company_id, searchQuery]);
 
   if (!isLoaded) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
