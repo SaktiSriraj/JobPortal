@@ -10,7 +10,7 @@ const AppLayout = () => {
         <Outlet />
       </main>
 
-      <div className="text-center text-slate-500">
+      <div className="text-center text-slate-500 pt-40">
         © Sakti Sriraj Mishra @ 2024
       </div>
     </div>
