@@ -61,7 +61,7 @@ const JobListing = () => {
         Latest Jobs
       </h1>
 
-      {/* Add filters here */}
+      {/* filters */}
       <form onSubmit={handleSearch} className='h-14 flex w-full gap-3 items-center mb-3'>
         <Input
           type="text"
