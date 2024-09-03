@@ -8,6 +8,7 @@ import PostJob from "./pages/post-job"
 import SavedJobs from "./pages/save-job"
 import MyJobs from "./pages/my-job"
 import { ThemeProvider } from "./components/theme-provider"
+import ProtectedRoute from "./components/protected-route"
 
 import "./App.css";
 // const router = createBrowserRouter([
@@ -26,12 +27,12 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<AppLayout />}>
       <Route path='' element={<LandingPage />} />
-      <Route path='onboarding' element={<Onboarding />} />
-      <Route path='jobs' element={<JobListing />} />
-      <Route path='job/:id' element={<JobPage />} />
-      <Route path='post-job' element={<PostJob />} />
-      <Route path='saved-jobs' element={<SavedJobs />} />
-      <Route path='my-jobs' element={<MyJobs />} />
+      <Route path='onboarding' element={<ProtectedRoute> <Onboarding /> </ProtectedRoute>} />
+      <Route path='jobs' element={<ProtectedRoute> <JobListing /> </ProtectedRoute>} />
+      <Route path='job/:id' element={<ProtectedRoute> <JobPage /> </ProtectedRoute>} />
+      <Route path='post-job' element={<ProtectedRoute> <PostJob /> </ProtectedRoute>} />
+      <Route path='saved-jobs' element={<ProtectedRoute> <SavedJobs /> </ProtectedRoute>} />
+      <Route path='my-jobs' element={<ProtectedRoute> <MyJobs /> </ProtectedRoute>} />
     </Route>
   )
 )
