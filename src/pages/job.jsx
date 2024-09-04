@@ -7,6 +7,7 @@ import { BarLoader } from "react-spinners";
 import { BriefcaseBusinessIcon, DoorClosedIcon, DoorOpenIcon, MapPinIcon } from "lucide-react";
 import MDEditor from "@uiw/react-md-editor";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import ApplyJobDrawer from "@/components/apply-job";
 
 
 const JobPage = () => {
@@ -101,6 +102,14 @@ const JobPage = () => {
       />
 
       {/* render applications */}
+      {job?.recruiter_id !== user?.id && (
+        <ApplyJobDrawer 
+          job={job} 
+          user={user} 
+          fetchJob={fnJob}
+          applied={job?.appliations?.find((ap) => ap.candidata_id === user.id)} 
+        />  
+      )}
     </div>
   )
 }
