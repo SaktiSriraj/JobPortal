@@ -9,19 +9,9 @@ import SavedJobs from "./pages/saved-job"
 import MyJobs from "./pages/my-jobs"
 import { ThemeProvider } from "./components/theme-provider"
 import ProtectedRoute from "./components/protected-route"
-
 import "./App.css";
-// const router = createBrowserRouter([
-//   {
-//     element: <AppLayout />,
-//     children: [
-//       {
-//         path: '/',
-//         element: <LandingPage />
-//       }
-//     ]
-//   }
-// ])
+import { SpeedInsights } from "@vercel/speed-insights/react"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +32,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <RouterProvider router={router} />
+      <SpeedInsights />
     </ThemeProvider>
   )
 }
