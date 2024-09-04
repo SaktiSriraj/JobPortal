@@ -14,6 +14,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { z } from "zod";
+import AddCompanyDrawer from "@/components/add-company-drawer";
 
 
 const schema = z.object({
@@ -147,7 +148,10 @@ const PostJob = () => {
               </Select>
             )}
           />
+
           {/* Add company drawer */}
+          <AddCompanyDrawer fetchCompanies={fnCompanies} />
+
         </div>
         {errors.location && (
           <p className="text-red-500">{errors.location.message}</p>
