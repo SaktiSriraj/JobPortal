@@ -32,7 +32,7 @@ const JobPage = () => {
   const { loading: loadingHiringStatus, fn: fnHiringStatus } = useFetch(
     updateHiringStatus,
     {
-      job_id: id,
+      jobs_id: id,
     }
   );
 
@@ -103,12 +103,12 @@ const JobPage = () => {
 
       {/* render applications */}
       {job?.recruiter_id !== user?.id && (
-        <ApplyJobDrawer 
-          job={job} 
-          user={user} 
+        <ApplyJobDrawer
+          job={job}
+          user={user}
           fetchJob={fnJob}
-          applied={job?.appliations?.find((ap) => ap.candidata_id === user.id)} 
-        />  
+          applied={job?.applications?.find((ap) => ap.candidate_id === user.id)}
+        />
       )}
     </div>
   )
